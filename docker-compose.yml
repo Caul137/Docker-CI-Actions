@@ -1,0 +1,72 @@
+
+
+services:
+  db:
+    container_name: mysql
+    image: mysql:8
+    networks:
+      - networkToReact
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=c
+      - MYSQL_DATABASE=caul
+      - MYSQL_USER=caul11
+      - MYSQL_PASSWORD=ca
+    volumes:
+      - db:/var/lib/mysql
+    
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    networks:
+      - networkToReact
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=caul11
+      - PMA_PASSWORD=ca
+    depends_on:
+      - db
+
+  myviteapp-prod:
+    container_name: vite-react-tsx-prod
+    build: 
+      context: .
+      dockerfile: dockerfile
+    networks:
+      - networkToReact
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    profiles: ["prod"]
+
+  myviteapp-dev:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    container_name: vite-react-tsx-dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: npm run dev -- --host
+    profiles: ["dev"]
+    networks:
+      - networkToReact
+
+volumes:
+  db:
+  
+networks:
+  networkToReact:
+    driver: bridge
+
+
+
+
