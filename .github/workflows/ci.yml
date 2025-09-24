@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   build:
     name: 'build && push'
@@ -16,7 +15,7 @@ jobs:
     steps: 
     - uses: actions/checkout@v5
 
-    - name: "node"
+    - name: "node |  ${{matrix.node}} "
       uses: uses: actions/setup-node@v5
       with:
         node-version: ${{matrix.node}}
