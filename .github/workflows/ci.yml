@@ -12,10 +12,11 @@ jobs:
     strategy:
       matrix:
         node: [ 20, 22, 24 ]
+        
     steps: 
     - uses: actions/checkout@v5
 
-    - name: "node |  ${{matrix.node}} "
+    - name: node | ${{matrix.node}}
       uses: uses: actions/setup-node@v5
       with:
         node-version: ${{matrix.node}}
