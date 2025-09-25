@@ -25,4 +25,4 @@ jobs:
       - run: npm test  
 
       - name: Build docker image
-        run: docker compose -t teste .
+        run: docker build -t teste .
