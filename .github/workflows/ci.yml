@@ -25,4 +25,4 @@ jobs:
       - run: npm test  
 
       - name: Build docker image
-        run: docker compose --profile prod up -t 1ci .
+        run: docker build -t teste .
