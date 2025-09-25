@@ -7,28 +7,28 @@ on:
 
 jobs:
   build:
-    name: 'build && push'
+    name: "build && push"
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 20, 22, 24 ]
+        node: [20, 22, 24]
 
-    steps: 
-    - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: node | ${{matrix.node}}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{matrix.node}}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
+      - name: node | ${{matrix.node}}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node}}
+          cache: "npm"
+      - run: npm ci
+      - run: npm test
 
-    - name: Tag
-      id: generate_tag
-      run: |
-        SHA=${echo $GITHUB_SHA | head -c7}
-        echo "sha=$SHA" >> $GITHUB_OUTPUT
+      - name: Tag
+        id: generate_tag
+        run: |
+          SHA=${echo $GITHUB_SHA | head -c7}
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
 
-    - name: Build docker image
-      run: docker build -t 1ci:${{steps.generate_tag.outputs.sha}}
+      - name: Build docker image
+        run: docker build -t 1ci:${{steps.generate_tag.outputs.sha}}
