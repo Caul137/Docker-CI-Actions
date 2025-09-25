@@ -36,8 +36,8 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
 
-      - name: Build docker image
-        run: docker build -t caul11/caul_ci:${{steps.generate_tag.outputs.sha}} .
-
-      - name: Push image
-        run: docker push caul11/caul_ci:${{steps.generate_tag.outputs.sha}}
+      - name: build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true 
+          tags: caul11/caul_ci:${{steps.generate_tag.outputs.sha}}, caul11/caul_ci:latest
