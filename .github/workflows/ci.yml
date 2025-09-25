@@ -37,7 +37,7 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
 
       - name: Build docker image
-        run: docker build -t caul11/ci:${{steps.generate_tag.outputs.sha}} .
+        run: docker build -t caul11/caul_ci:${{steps.generate_tag.outputs.sha}} .
 
       - name: Push image
-        run: docker push caul11/ci:${{steps.generate_tag.outputs.sha}}
+        run: docker push caul11/caul_ci:${{steps.generate_tag.outputs.sha}}
