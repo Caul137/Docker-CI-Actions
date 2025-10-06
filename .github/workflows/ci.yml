@@ -45,6 +45,36 @@ jobs:
       #   id: login-ecr
       #   uses: aws-actions/amazon-ecr-login@v2
 
+      # - name: build docker image
+      #   id: build-docker-image
+      #   env:
+      #     REGISRTY: ${{ steps.login-ecr.outputs.registry }}
+      #     TAG: ${{ steps.generate_tag.outputs.sha}}
+      #   run: |
+      #     docker build -t $REGISRTY/caul_ci:$TAG
+      #     docker push $REGISRTY/caul_ci:$TAG
+      #     docker tag -t $REGISRTY/caul_ci:$TAG $REGISRTY/caul_ci:$latest
+      #     docker push $REGISRTY/caul_ci:$latest
+      #     IMAGE=$(echo $REGISRTY/caul_ci:$TAG )
+      #     echo "image=$IMAGE" >> $GITHUB_OUTPUT
+
+      # - name: Deploy to App Runner
+      #   id: deploy-app-runner
+      #   uses: awslabs/amazon-app-runner-deploy@main
+      #   with:
+      #     service: caul_ci
+      #     image: ${{ steps.build-docker-image.outputs.image}}
+      #     acces-role-arn: 
+      #     region: us-east-2
+      #     cpu: 1
+      #     memory: 2
+      #     port: 80
+      #     wait-for-service-stability-seconds: 180
+
+      # - name: App runner check
+      #   run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service.url }}"
+
+
       # - name: Login container registry
       #   uses: docker/login-action@v3
       #   with:
