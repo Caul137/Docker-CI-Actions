@@ -1,5 +1,6 @@
 
 
+
 # 📚Projeto React(TSX) com Docker, MySQL e Vite
 
 Este projeto foi criado com **Create React App** e configurado para rodar tanto em **ambiente de desenvolvimento** quanto em **produção** usando Docker.
@@ -64,4 +65,7 @@ Linkei a aplicação React no YAML usando o Dockerfile correspondente ✔
 ---
 
 
+
+
+# CI
 
