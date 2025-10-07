@@ -8,7 +8,7 @@
         [
             "@semantic-release/changelog",
             {
-                "changeLogFile": "CHANGELOG.md"
+                "changelogFile": "CHANGELOG.md"
             }
         ],
         [
